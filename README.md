@@ -1,4 +1,4 @@
-# Schedulator
+# The Schedulator
 
 An online appointment scheduler built for the Turing School of Software & Design.
 

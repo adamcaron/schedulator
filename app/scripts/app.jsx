@@ -1,12 +1,18 @@
 import '../styles/base.css';
 import React from 'react/addons';
 
-let Hello = React.createClass({
+let App = React.createClass({
   render() {
-    return(
-      <h1>Hello, {this.props.name}!</h1>
+    return (
+      <div id='shell'>
+        <header>
+          <h1>Schedulator</h1>
+        </header>
+        <main>
+        </main>
+      </div>
     )
   }
 });
 
-React.render(<Hello name='World' />, document.body);
+React.render(<App />, document.body);
