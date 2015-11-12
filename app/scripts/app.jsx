@@ -1,5 +1,6 @@
 import '../styles/base.css';
 import React from 'react/addons';
+import Schedules from '../data/schedules'
 
 let App = React.createClass({
   getInitialState() {
@@ -46,14 +47,17 @@ let CreateSchedule = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
+    let id = Date.now().toString();
     let map = Array.prototype.map;
     let uniqueDashboardUrl = map.call(Date.now().toString(), function(digit) { return (10 - digit).toString(); }).join('');
 
     let schedule = {
-      url: Date.now().toString(),
+      url: id,
       dashboardUrl: uniqueDashboardUrl,
       slots: this.props.timeSlots,
     }
+
+    Schedules[id] = schedule;
   },
 
   render() {

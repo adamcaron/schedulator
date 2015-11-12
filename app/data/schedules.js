@@ -1,4 +1,6 @@
-// module.exports = [];
+module.exports = {
+}
+
 
 // to create the unique id,
 // take the data we're about to persist,
