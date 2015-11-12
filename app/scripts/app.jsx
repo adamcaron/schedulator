@@ -42,7 +42,7 @@ let CreateSchedule = React.createClass({
     let endTime = (React.findDOMNode(this.refs.endTime).value.trim());
 
     this.props.addNewSlot(date, startTime, endTime)
-    this.refs.newSlotForm.getDOMNode().reset();
+    React.findDOMNode(this.refs.newSlotForm).reset();
   },
 
   handleSubmit(e) {
