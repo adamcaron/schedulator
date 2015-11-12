@@ -1,6 +1,6 @@
 import '../styles/base.css';
 import React from 'react/addons';
-import Schedules from '../data/schedules'
+let socket = io();
 
 let App = React.createClass({
   getInitialState() {
@@ -38,9 +38,9 @@ let App = React.createClass({
 let CreateSchedule = React.createClass({
   addSlot(e) {
     e.preventDefault();
-    let date = (React.findDOMNode(this.refs.date).value.trim());
-    let startTime = (React.findDOMNode(this.refs.startTime).value.trim());
-    let endTime = (React.findDOMNode(this.refs.endTime).value.trim());
+    let date = React.findDOMNode(this.refs.date).value.trim();
+    let startTime = React.findDOMNode(this.refs.startTime).value.trim();
+    let endTime = React.findDOMNode(this.refs.endTime).value.trim();
 
     this.props.addNewSlot(date, startTime, endTime)
     React.findDOMNode(this.refs.newSlotForm).reset();
@@ -58,7 +58,8 @@ let CreateSchedule = React.createClass({
       slots: this.props.timeSlots,
     }
 
-    Schedules[id] = schedule;
+    // hit server with a socket.
+    // Schedules[id] = schedule;
   },
 
   render() {
