@@ -43,6 +43,7 @@ let CreateSchedule = React.createClass({
     let endTime = (React.findDOMNode(this.refs.endTime).value.trim());
 
     this.props.addNewSlot(date, startTime, endTime)
+    React.findDOMNode(this.refs.newSlotForm).reset();
   },
 
   handleSubmit(e) {
@@ -70,7 +71,7 @@ let CreateSchedule = React.createClass({
     });
 
     return (
-      <form className='ui form container'>
+      <form className='ui form container' ref='newSlotForm'>
 
         <div className='field'>
           <label>Date:</label>
