@@ -9,7 +9,13 @@ let App = React.createClass({
     return this.state
   },
   handleNewSlot(date, startTime, endTime) {
-    let slot = {date: date, startTime: startTime, endTime: endTime}
+    let slot = {
+      id: Date.now().toString(),
+      date: date,
+      startTime: startTime,
+      endTime: endTime,
+      user: null
+    }
     let updatedTimeSlots = this.state.timeSlots.concat(slot);
     this.setState({timeSlots: updatedTimeSlots})
   },
@@ -40,14 +46,20 @@ let CreateSchedule = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log('Schedule Created!');
-    // grab this.props.timeSlots and create
+    let map = Array.prototype.map;
+    let uniqueDashboardUrl = map.call(Date.now().toString(), function(digit) { return (10 - digit).toString(); }).join('');
+
+    let schedule = {
+      url: Date.now().toString(),
+      dashboardUrl: uniqueDashboardUrl,
+      slots: this.props.timeSlots,
+    }
   },
 
   render() {
     let pendingSchedule = this.props.timeSlots.map(function(slot) {
       return (
-        <p>
+        <p key={slot.id}>
           {slot.date}, from {slot.startTime} to {slot.endTime}
         </p>
       )
