@@ -17,6 +17,7 @@ let App = React.createClass({
       endTime: endTime,
       user: null
     }
+
     let updatedTimeSlots = this.state.timeSlots.concat(slot);
     this.setState({timeSlots: updatedTimeSlots});
   },

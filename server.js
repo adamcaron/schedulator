@@ -1,3 +1,4 @@
+"use strict";
 const path = require('path');
 const express = require('express');
 
@@ -21,10 +22,13 @@ io.on('connection', function (socket) {
   socket.emit('statusMessage', 'You have connected.');
 
   socket.on('createSchedule', function (schedule) {
-    console.log(schedule)
+    schedules[schedule["url"]] = schedule
   });
 
   socket.on('disconnect', function () {
     console.log('A user has disconnected.', io.engine.clientsCount);
   });
 });
+
+let schedules = {
+};
