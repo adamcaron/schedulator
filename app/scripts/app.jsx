@@ -18,7 +18,7 @@ let App = React.createClass({
       user: null
     }
     let updatedTimeSlots = this.state.timeSlots.concat(slot);
-    this.setState({timeSlots: updatedTimeSlots})
+    this.setState({timeSlots: updatedTimeSlots});
   },
   render() {
     return (
@@ -58,8 +58,7 @@ let CreateSchedule = React.createClass({
       slots: this.props.timeSlots,
     }
 
-    // hit server with a socket.
-    // Schedules[id] = schedule;
+    socket.emit('createSchedule', schedule)
   },
 
   render() {
