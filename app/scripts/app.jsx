@@ -1,5 +1,6 @@
 import '../styles/base.css';
 import React from 'react/addons';
+let socket = io();
 
 let App = React.createClass({
   getInitialState() {
@@ -16,8 +17,9 @@ let App = React.createClass({
       endTime: endTime,
       user: null
     }
+
     let updatedTimeSlots = this.state.timeSlots.concat(slot);
-    this.setState({timeSlots: updatedTimeSlots})
+    this.setState({timeSlots: updatedTimeSlots});
   },
   render() {
     return (
@@ -37,9 +39,9 @@ let App = React.createClass({
 let CreateSchedule = React.createClass({
   addSlot(e) {
     e.preventDefault();
-    let date = (React.findDOMNode(this.refs.date).value.trim());
-    let startTime = (React.findDOMNode(this.refs.startTime).value.trim());
-    let endTime = (React.findDOMNode(this.refs.endTime).value.trim());
+    let date = React.findDOMNode(this.refs.date).value.trim();
+    let startTime = React.findDOMNode(this.refs.startTime).value.trim();
+    let endTime = React.findDOMNode(this.refs.endTime).value.trim();
 
     this.props.addNewSlot(date, startTime, endTime)
     React.findDOMNode(this.refs.newSlotForm).reset();
@@ -47,14 +49,17 @@ let CreateSchedule = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
+    let id = Date.now().toString();
     let map = Array.prototype.map;
     let uniqueDashboardUrl = map.call(Date.now().toString(), function(digit) { return (10 - digit).toString(); }).join('');
 
     let schedule = {
-      url: Date.now().toString(),
+      url: id,
       dashboardUrl: uniqueDashboardUrl,
       slots: this.props.timeSlots,
     }
+
+    socket.emit('createSchedule', schedule)
   },
 
   render() {
