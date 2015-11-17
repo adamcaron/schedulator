@@ -49,17 +49,14 @@ let CreateSchedule = React.createClass({
 
   handleSubmit(e) {
     e.preventDefault();
-    let id = Date.now().toString();
-    let map = Array.prototype.map;
-    let uniqueDashboardUrl = map.call(Date.now().toString(), function(digit) { return (10 - digit).toString(); }).join('');
 
-    let schedule = {
-      url: id,
-      dashboardUrl: uniqueDashboardUrl,
-      slots: this.props.timeSlots,
-    }
+    let schedule = { slots: this.props.timeSlots }
 
-    socket.emit('createSchedule', schedule)
+    $.ajax({
+      type: 'POST',
+      url: '/schedules/new',
+      data: { schedule: schedule }
+    });
   },
 
   render() {
